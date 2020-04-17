@@ -2,6 +2,7 @@
 
 :root {
   --color-text: #666;
+  --color-lighter-blue:#0084FF;
   --color-deeper-blue: #4A84FF;
   --color-bule: #E5F2FF;
   --color-background: #fff;
@@ -63,4 +64,15 @@ a {
 .right {
   float: right;
 }
-
+input::-webkit-input-placeholder {
+  color:#8590A6;
+  font-size:15px;
+}
+input{
+  border:0;
+  outline:none;
+  background-color: #f6f6f6;
+}
+button{
+  outline:none;
+}
