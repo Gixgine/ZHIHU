@@ -19,7 +19,7 @@ export default {
     position: relative;
     z-index: 100;
     min-width: 1032px;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: #fff;
     box-shadow:0 1px 3px rgba(26,26,26,.1);
     /* width:100vw; */

@@ -28,7 +28,7 @@ body {
 }
 
 a {
-  color: var(--color-text);
+  color: #175199;
   text-decoration: none;
 }
 
@@ -76,3 +76,4 @@ input{
 button{
   outline:none;
 }
+
