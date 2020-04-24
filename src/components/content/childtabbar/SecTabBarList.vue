@@ -1,5 +1,5 @@
 <template>
-  <div id="tab-bar-list">
+  <div id="sec-tab-bar-list">
     <div class="list-header">
       <div class="left">
         <slot name="left">
@@ -19,7 +19,7 @@
     </div>
       <div class="list-content">
         <child-tab-bar-list  
-        v-for="(item,index) in bell.list0" 
+        v-for="(item,index) in chat.list0" 
         :key="index"
         :item="item">
 
@@ -45,14 +45,14 @@ export default {
     ChildTabBarList
   },
   props:{
-    bell:{
+    chat:{
       type:Object
     }
   }
 }
 </script>
 <style scoped>
-  #tab-bar-list{
+  #sec-tab-bar-list{
     position: absolute;
     top:100%;
   }
@@ -128,5 +128,9 @@ export default {
     float: right;
     margin-right: 25px;
     cursor: pointer;
+  }
+  .left img{
+    width: 14px;
+    height: 14px;
   }
 </style>

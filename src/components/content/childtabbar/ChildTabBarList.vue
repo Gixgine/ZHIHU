@@ -4,7 +4,7 @@
             <a href="javascript:;">
               {{item.cname}}
             </a>
-            恢复了文章下你的评论
+            回复了文章下你的评论
             <a href="javascript:;">
               {{item.cparagragh}}
             </a>

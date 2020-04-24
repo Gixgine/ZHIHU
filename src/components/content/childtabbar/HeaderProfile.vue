@@ -5,19 +5,50 @@
               ></div>
       </div>
       <tab-bar-list class="bell-list" 
+      :bell="bell"
       v-show="bellshow">
-        
+        <template v-slot:left>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/category_lighter.png" alt="">
+            </a>
+            <a href="javascript:;">
+              <img src="~assets/img/header/category_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
+        <template v-slot:center>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/people_lighter.png" alt="">
+            </a>
+            <a href="javascript:;">
+              <img src="~assets/img/header/people_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
+        <template v-slot:right>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/heart_lighter.png" alt="">
+            </a>
+            <a href="javascript:;">
+              <img src="~assets/img/header/heart_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
       </tab-bar-list>
       <div class="header-profile-chat">
         <div class="chat-span" 
        
         ></div>
       </div>
-      <tab-bar-list 
+      <sec-tab-bar-list 
       class="chat-list"
       v-show="chatshow"
-      :bell="bell">
-      </tab-bar-list>
+      :chat="chat"
+      >
+      </sec-tab-bar-list>
       <div class="header-profile-myself">
         <a href="javascript:;">
           <img src="~assets/img/header/header-profile-avatar.png" alt="" class="profile-img">
@@ -32,6 +63,7 @@
 <script>
 
 import TabBarList from "./TabBarList"
+import SecTabBarList from "./SecTabBarList"
 import request from "networks/request.js"
 import ProfileList from "./ProfileList"
 
@@ -40,7 +72,8 @@ export default {
   name:"HeaderProfile",
   components:{
     TabBarList,
-    ProfileList
+    ProfileList,
+    SecTabBarList
   },
     data(){
     return{
@@ -60,13 +93,15 @@ export default {
   methods:{
     hideBellList(){
       document.addEventListener("click",(e)=>{
-        let targetClass=e.target.className;
+        let targetClass=e.currentTarget.className;
         if(targetClass!="bell-list"&&targetClass!="bell-span"){
           this.bellshow=false
         };
         if(targetClass==="bell-span"){
           this.bellshow=true
         }
+        console.log(targetClass);
+        
       })
     },
     hideChatList(){
@@ -98,6 +133,8 @@ export default {
       this.bell.list1=res.data.data.header.bell.list1;
       this.bell.list2=res.data.data.header.bell.list2;
       this.chat.list0=res.data.data.header.chat.list0;
+      console.log(res);
+      console.log(this.bell.list0)
     }
   )
   },
@@ -155,5 +192,13 @@ export default {
   .profile-list{
     position: absolute;
     right:-20px;
+  }
+  /* .bell-left{
+    height: px;
+    width: 14px;
+  } */
+  .bell-icon img{
+    height: 22px;
+    width: 22px;
   }
 </style>
