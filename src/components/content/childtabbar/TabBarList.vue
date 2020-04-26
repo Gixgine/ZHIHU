@@ -1,18 +1,33 @@
 <template>
-  <div id="tab-bar-list">
+  <div id="tab-bar-list" @click="bellClick">
     <div class="list-header">
       <div class="left">
-        <slot name="left">
+        <slot name="left-icon">
+        左
+      </slot>
+      </div>
+      <div class="left">
+        <slot name="left-active-icon">
         左
       </slot>
       </div>
       <div class="center">
-        <slot name="center">
+        <slot name="center-icon">
+        中
+      </slot>
+      </div>
+      <div class="center">
+        <slot name="center-active-icon">
         中
       </slot>
       </div>
       <div class="right">
-        <slot name="right">
+        <slot name="right-icon">
+        右
+      </slot>
+      </div>
+      <div class="right">
+        <slot name="right-active-icon">
         右
       </slot>
       </div>
@@ -41,6 +56,11 @@ import ChildTabBarList from "./ChildTabBarList"
 
 export default {
   name:"TabBarList",
+  data(){
+    return {
+      bellClickClass:"",
+    }
+  },
   components:{
     ChildTabBarList
   },
@@ -48,7 +68,28 @@ export default {
     bell:{
       type:Object
     }
+  },
+  methods:{
+  bellClick(e){
+      if(e.currentTarget.className){
+        this.bellClickClass=e.currentTarget.className
+      }
+      console.log(e.currentTarget.className);
+    },
+  eventLister(){
+    var _this=this;
+    document.addEventListener("click",(e)=>{
+      if(_this.bellClickClass){
+        _this.$emit("bellClick",_this.bellClickClass)
+      }else{
+        _this.$emit("bellClick","aaa")
+      }
+    })
   }
+  },
+  mounted() {
+    this.eventLister()
+  },
 }
 </script>
 <style scoped>

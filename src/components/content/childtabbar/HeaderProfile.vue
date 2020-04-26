@@ -1,37 +1,50 @@
 <template>
   <div class="header-profile">
-      <div class="header-profile-bell">
+      <div class="header-profile-bell" >
         <div class="bell-span"
               ></div>
       </div>
       <tab-bar-list class="bell-list" 
       :bell="bell"
-      v-show="bellshow">
-        <template v-slot:left>
+      v-show="bellshow"
+      @bellClick="bellListClick">
+        <template v-slot:left-icon>
           <div class="bell-icon">
             <a href="javascript:;" >
               <img src="~assets/img/header/category_lighter.png" alt="">
             </a>
+          </div>
+        </template>
+        <template v-slot:left-active-icon>
+          <div class="bell-icon">
             <a href="javascript:;">
               <img src="~assets/img/header/category_deeper.png" alt="">
             </a>
           </div>
         </template>
-        <template v-slot:center>
+        <template v-slot:center-icon>
           <div class="bell-icon">
             <a href="javascript:;" >
               <img src="~assets/img/header/people_lighter.png" alt="">
             </a>
+          </div>
+        </template>
+        <template v-slot:center-active-icon>
+          <div class="bell-icon">
             <a href="javascript:;">
               <img src="~assets/img/header/people_deeper.png" alt="">
             </a>
           </div>
         </template>
-        <template v-slot:right>
+        <template v-slot:right-icon>
           <div class="bell-icon">
             <a href="javascript:;" >
               <img src="~assets/img/header/heart_lighter.png" alt="">
             </a>
+          </div>
+        </template>
+        <template v-slot:right-active-icon>
+          <div class="bell-icon">
             <a href="javascript:;">
               <img src="~assets/img/header/heart_deeper.png" alt="">
             </a>
@@ -87,45 +100,38 @@ export default {
       },
       chatshow:false,
       bellshow:false,
-      profileshow:false
+      profileshow:false,
+      bellCurrentClass:"",
     }
   },
   methods:{
-    hideBellList(){
-      document.addEventListener("click",(e)=>{
-        let targetClass=e.currentTarget.className;
-        if(targetClass!="bell-list"&&targetClass!="bell-span"){
-          this.bellshow=false
-        };
-        if(targetClass==="bell-span"){
-          this.bellshow=true
-        }
-        console.log(targetClass);
-        
-      })
+    bellListClick(res){
+      this.bellCurrentClass=res;
+      console.log(res);
     },
-    hideChatList(){
+    // hideBellList(e){
+    //   if(e.target.className==="bell-span"||this.bellCurrentClass==="header-profile-bell"){
+    //     this.bellshow=true
+    //   }else{
+    //     this.bellshow=false
+    //   }
+    //   console.log(e.target.className);
+    // },
+    clickWindowHide(){
+      var _this=this
       document.addEventListener("click",(e)=>{
-        let targetClass=e.target.className;
-        if(targetClass!="chat-list"&&targetClass!="chat-span"){
-          this.chatshow=false
-        };
-        if(targetClass==="chat-span"){
-          this.chatshow=true
-        }
-      })
-    },
-    hideProfileList(){
-      document.addEventListener("click",(e)=>{
-        let targetClass=e.target.className;
-        if(targetClass!="profile-list"&&targetClass!="profile-img"){
-          this.profileshow=false
-        };
-        if(targetClass==="profile-img"){
-          this.profileshow=true
-        }
+        if(e.target.className==="bell-span"||_this.bellCurrentClass==="bell-list"){
+        _this.bellshow=true
+      }else{
+        _this.bellshow=false
+      }
+      console.log(e.target.className,);
+      console.log(_this.bellCurrentClass);
       })
     }
+  },
+  mounted() {
+    this.clickWindowHide()
   },
   created(){
     request().then(res=>{
@@ -133,16 +139,11 @@ export default {
       this.bell.list1=res.data.data.header.bell.list1;
       this.bell.list2=res.data.data.header.bell.list2;
       this.chat.list0=res.data.data.header.chat.list0;
-      console.log(res);
-      console.log(this.bell.list0)
+      // console.log(res);
+      // console.log(this.bell.list0)
     }
   )
   },
-  mounted() {
-    this.hideBellList();
-    this.hideChatList();
-    this.hideProfileList();
-  }
 }
 </script>
 <style scoped>

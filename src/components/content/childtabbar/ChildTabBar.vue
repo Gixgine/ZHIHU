@@ -63,7 +63,7 @@ export default {
   }
   .mainitem{
     display:flex;
-    /* width: 222px; */
+    width: 250px;
     margin: 0 20px;
     height: 52px;
     line-height: 52px;
