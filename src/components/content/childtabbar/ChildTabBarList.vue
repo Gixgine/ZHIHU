@@ -6,7 +6,7 @@
             </a>
             回复了文章下你的评论
             <a href="javascript:;">
-              {{item.cparagragh}}
+              {{item.cparagraph}}
             </a>
           </span>
   </div>
@@ -16,7 +16,7 @@ export default {
   name:"ChildTabBarList",
   props:{
     item:Object
-  }
+  },
 }
 </script>
 <style scoped>
