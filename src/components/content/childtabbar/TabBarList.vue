@@ -1,27 +1,80 @@
 <template>
   <div id="tab-bar-list">
-    <div class="list-header">
-      <div>
-        <slot name="icon"></slot>
-      </div>
-      <div>
-        <slot name="active-icon"></slot>
-      </div>
+    <div class="child-switch">
+      <child-switch-button 
+      class="button"
+      :link="link[0]"
+      @click.native="btnClick(link[0])"
+      :clickClass="clickClass">
+        <template v-slot:icon>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/category_lighter.png" alt="">
+            </a>
+          </div>
+        </template>
+        <template v-slot:active-icon>
+          <div class="bell-icon">
+            <a href="javascript:;">
+              <img src="~assets/img/header/category_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
+    </child-switch-button>
+    <child-switch-button 
+    class="button"
+    :link="link[1]"
+    @click.native="btnClick(link[1])"
+    :clickClass="clickClass">
+        <template v-slot:icon>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/people_lighter.png" alt="">
+            </a>
+          </div>
+        </template>
+        <template v-slot:active-icon>
+          <div class="bell-icon">
+            <a href="javascript:;">
+              <img src="~assets/img/header/people_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
+    </child-switch-button>
+    <child-switch-button 
+    class="button"
+    :link="link[2]"
+    @click.native="btnClick(link[2])"
+    :clickClass="clickClass">
+        <template v-slot:icon>
+          <div class="bell-icon">
+            <a href="javascript:;" >
+              <img src="~assets/img/header/heart_lighter.png" alt="">
+            </a>
+          </div>
+        </template>
+        <template v-slot:active-icon>
+          <div class="bell-icon">
+            <a href="javascript:;">
+              <img src="~assets/img/header/heart_deeper.png" alt="">
+            </a>
+          </div>
+        </template>
+    </child-switch-button>
     </div>
       <div class="list-content">
         <child-tab-bar-list  
-        v-for="(item,index) in bell.list0" 
+        v-for="(item,index) in bell.list[clickClass]" 
         :key="index"
         :item="item">
-
         </child-tab-bar-list>
       </div>
       <div class="list-bottom">
         <div class="bottom-left">
-          <slot name="bottom-left">底左</slot>
+          <slot name="bottom-left">设置</slot>
         </div>
         <div class="bottom-right">
-          <slot name="bottom-right">底右</slot>
+          <slot name="bottom-right">查看全部通知</slot>
         </div>
       </div>
   </div>
@@ -29,64 +82,39 @@
 <script>
 
 import ChildTabBarList from "./ChildTabBarList"
+import ChildSwitchButton from "../childtabbar/ChildHeaderProfile/ChildSwitchButton"
 
 export default {
   name:"TabBarList",
   data(){
     return {
       bellClickClass:"",
+      link:[
+        "category",
+        "people",
+        "heart"
+      ],
+      clickClass:0
     }
   },
   components:{
-    ChildTabBarList
+    ChildTabBarList,
+    ChildSwitchButton
   },
   props:{
     bell:{
       type:Object
     }
-  }
+  },
+  methods: {
+    btnClick(a){
+      this.clickClass=this.link.indexOf(a)
+      // console.log(this.clickClass);
+    }
+  },
 }
 </script>
 <style scoped>
-  /* #tab-bar-list{
-    position: absolute;
-    top:100%;
-  } */
-  .list-header{
-    /* position: relative; */
-    width: 360px;
-    height: 48px;
-    display:flex;
-    align-items: center;
-    /* border-radius: 5px 5px 0 0;
-    border:1px solid #F1F1F1; */
-    /* margin-top: 15px; */
-    background: white;
-  }
-  /* .list-header:before{
-    position: absolute;
-    content:"";
-    height: 0;
-    width: 0;
-    border-style:solid;
-    border-color: transparent transparent #F1F1F1 transparent;
-    border-width:10px;
-    left:50%;
-    top:-20px;
-    transform:translate(-50%);
-  }
-  .list-header:after{
-    position: absolute;
-    content:"";
-    height: 0;
-    width: 0;
-    border-style:solid;
-    border-color: transparent transparent #fff transparent;
-    border-width:9px;
-    left:50%;
-    top:-18px;
-    transform:translate(-50%);
-  } */
   .list-content{
     width: 360px;
     height: 350px;
@@ -105,10 +133,10 @@ export default {
   .list-bottom{
     width: 360px;
     height: 40px;
-    /* border:solid 1px #F1F1F1; */
-    border-top:0;
+    border-top:solid 1px #F1F1F1;
     border-radius: 0 0 5px 5px;
     line-height: 40px;
+    color: #8590a6
   }
   .bottom-left{
     float: left;
@@ -119,5 +147,16 @@ export default {
     float: right;
     margin-right: 25px;
     cursor: pointer;
+  }
+  .bell-icon img{
+    height: 22px;
+    width: 22px;
+  }
+  .child-switch{
+    display:flex;
+    border-bottom:solid 1px #F1F1F1;
+  }
+  .button{
+    flex:1;
   }
 </style>

@@ -3,65 +3,30 @@
       <el-popover
         placement="bottom"
         trigger="click">
-      <tab-bar-list class="bell-list" 
-        :bell="bell">
-        <template v-slot:left-icon>
-          <div class="bell-icon">
-            <a href="javascript:;" >
-              <img src="~assets/img/header/category_lighter.png" alt="">
-            </a>
-          </div>
-        </template>
-        <template v-slot:left-active-icon>
-          <div class="bell-icon">
-            <a href="javascript:;">
-              <img src="~assets/img/header/category_deeper.png" alt="">
-            </a>
-          </div>
-        </template>
-        <template v-slot:center-icon>
-          <div class="bell-icon" v-show="false">
-            <a href="javascript:;" >
-              <img src="~assets/img/header/people_lighter.png" alt="">
-            </a>
-          </div>
-        </template>
-        <template v-slot:center-active-icon>
-          <div class="bell-icon" v-show="true">
-            <a href="javascript:;">
-              <img src="~assets/img/header/people_deeper.png" alt="">
-            </a>
-          </div>
-        </template>
-        <template v-slot:right-icon>
-          <div class="bell-icon">
-            <a href="javascript:;" >
-              <img src="~assets/img/header/heart_lighter.png" alt="">
-            </a>
-          </div>
-        </template>
-        <template v-slot:right-active-icon>
-          <div class="bell-icon">
-            <a href="javascript:;">
-              <img src="~assets/img/header/heart_deeper.png" alt="">
-            </a>
-          </div>
-        </template>
+      <tab-bar-list 
+      class="bell-list" 
+      :bell="bell"
+      :key="timer">
       </tab-bar-list>
-      <div class="header-profile-bell" slot="reference">
+      <div class="header-profile-bell" slot="reference" @click="handleLoad">
         <div class="bell-span"></div>
       </div>
       </el-popover>
-      <div class="header-profile-chat">
-        <div class="chat-span"></div>
-      </div>
+      
+      <el-popover
+        placement="bottom"
+        trigger="click">
       <sec-tab-bar-list 
       class="chat-list"
       :chat="chat"
-      v-show="false"
       >
       </sec-tab-bar-list>
-      <div class="header-profile-myself">
+      <div class="header-profile-chat" slot="reference">
+        <div class="chat-span"></div>
+      </div>
+      </el-popover>
+      <el-popover>
+      <div class="header-profile-myself" slot="reference">
         <a href="javascript:;">
           <img src="~assets/img/header/header-profile-avatar.png" alt="" class="profile-img">
         </a>
@@ -69,6 +34,7 @@
       <profile-list class="profile-list">
 
       </profile-list>
+      </el-popover>
   </div>
 </template>
 <script>
@@ -89,25 +55,33 @@ export default {
     data(){
     return{
       bell:{
-        list0:[],
-        list1:[],
-        list2:[]
+        list:[
+          [],
+          [],
+          []
+        ]
       },
       chat:{
-        list0:[]
+        list:[]
       },
+      timer:""
     }
   },
   created(){
     request().then(res=>{
-      this.bell.list0=res.data.data.header.bell.list0;
-      this.bell.list1=res.data.data.header.bell.list1;
-      this.bell.list2=res.data.data.header.bell.list2;
-      this.chat.list0=res.data.data.header.chat.list0;
+      this.bell.list[0]=res.data.data.header.bell.list0;
+      this.bell.list[1]=res.data.data.header.bell.list1;
+      this.bell.list[2]=res.data.data.header.bell.list2;
+      this.chat.list=res.data.data.header.chat.list0;
       console.log(res);
-      console.log(this.bell.list0)
+      console.log(this.bell.list[0])
     }
   )
+  },
+  methods: {
+    handleLoad(){
+      this.timer=new Date().getTime()
+    }
   },
 }
 </script>
@@ -151,20 +125,8 @@ export default {
   .header-profile-myself{
     cursor: pointer;
   }
-  /* .bell-list{
-    position: absolute;
-    left:0;
-  } */
-  .profile-list{
+  /* .profile-list{
     position: absolute;
     right:-20px;
-  }
-  /* .bell-left{
-    height: px;
-    width: 14px;
   } */
-  .bell-icon img{
-    height: 22px;
-    width: 22px;
-  }
 </style>

@@ -34,23 +34,23 @@ export default {
 }
 </script>
 <style scoped>
-  #tab-bar-list{
+  /* #tab-bar-list{
     position: absolute;
     top:100%;
-  }
+  } */
   .list-header{
-    position: relative;
-    width: 132px;
+    /* position: relative; */
+    width: 148px;
     height: 7px;
     display:flex;
     align-items: center;
     border-radius: 5px 5px 0 0;
     border:1px solid #F1F1F1;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     background: white;
     border-bottom:0;
   }
-  .list-header:before{
+  /* .list-header:before{
     position: absolute;
     content:"";
     height: 0;
@@ -73,9 +73,9 @@ export default {
     left:50%;
     top:-18px;
     transform:translate(-50%);
-  }
+  } */
   .profile-list-content{
-    width: 132px;
+    width: 148px;
     height: 144px;
     overflow-x:hidden;
     overflow-y: auto;
@@ -85,10 +85,10 @@ export default {
   }
   .profile-list-content div{
     height: 36px;
-    width: 132px;
+    width: 148px;
     /* text-align: center; */
     line-height: 36px;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     cursor: pointer;
     font-size: 15px;
     background-color: #fff;
@@ -101,7 +101,7 @@ export default {
     padding-top: 3px;
   }
   .list-bottom{
-    width: 132px;
+    width: 148px;
     height: 7px;
     border:solid 1px #F1F1F1;
     border-top:0;

@@ -1,36 +1,41 @@
 <template>
   <div id="sec-tab-bar-list">
     <div class="list-header">
-      <div class="left">
-        <slot name="left">
-        左
-      </slot>
-      </div>
       <div class="center">
         <slot name="center">
-        中
-      </slot>
-      </div>
-      <div class="right">
-        <slot name="right">
-        右
+        我的私信
       </slot>
       </div>
     </div>
       <div class="list-content">
-        <child-tab-bar-list  
-        v-for="(item,index) in chat.list0" 
+        <div  
+        v-for="(item,index) in chat.list" 
         :key="index"
-        :item="item">
-
-        </child-tab-bar-list>
+        :item="item"
+        class="inner-content">
+          <div class="img-content">
+            <a href="javascript:;">
+              <img :src="item.image" alt="">
+            </a>
+          </div>
+          <div class="id-pa">
+            <div class="identity-content">
+              <span>
+              {{item.name}}
+              </span>
+            </div>
+            <div class="paragraph-content">
+              {{item.paragraph}}
+            </div>
+          </div>
+        </div>
       </div>
       <div class="list-bottom">
         <div class="bottom-left">
-          <slot name="bottom-left">底左</slot>
+          <slot name="bottom-left">写新私信</slot>
         </div>
         <div class="bottom-right">
-          <slot name="bottom-right">底右</slot>
+          <slot name="bottom-right">查看全部私信</slot>
         </div>
       </div>
   </div>
@@ -52,22 +57,22 @@ export default {
 }
 </script>
 <style scoped>
-  #sec-tab-bar-list{
+  /* #sec-tab-bar-list{
     position: absolute;
     top:100%;
-  }
+  } */
   .list-header{
-    position: relative;
+    /* position: relative; */
     width: 360px;
     height: 48px;
     display:flex;
     align-items: center;
     border-radius: 5px 5px 0 0;
     border:1px solid #F1F1F1;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     background: white;
   }
-  .list-header:before{
+  /* .list-header:before{
     position: absolute;
     content:"";
     height: 0;
@@ -90,6 +95,13 @@ export default {
     left:50%;
     top:-18px;
     transform:translate(-50%);
+  } */
+  .center{
+    flex:1;
+    cursor: pointer;
+  }
+  .center:hover{
+    color: #8590a6
   }
   .list-header div{
     width: 120px;
@@ -105,11 +117,28 @@ export default {
     border-top:0;
   }
   .inner-content{
-    position: relative;
-    font-size: 14px;
-    line-height: 25px;
-    padding:15px 10px;
-    border-bottom:solid 1px #F1F1F1;
+    width: 343px;
+    height: 74px;
+    /* padding:15px 10px; */
+    display:flex;
+  }
+  .inner-content .img-content{
+    width: 60px;
+    height: 60px;
+    padding: 10px;
+  }
+  .inner-content .id-pa{
+    width: 283px;
+    padding: 10px 0px;
+  }
+  .inner-content .identity-content{
+    font-size: 15px;
+  }
+  .inner-content .paragraph-content{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color:#8590a6;
   }
   .list-bottom{
     width: 360px;
@@ -118,6 +147,7 @@ export default {
     border-top:0;
     border-radius: 0 0 5px 5px;
     line-height: 40px;
+    color: #8590a6
   }
   .bottom-left{
     float: left;
