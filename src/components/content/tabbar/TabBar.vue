@@ -16,9 +16,11 @@ export default {
 </script>
 <style scoped>
   .tabbar{
-    position: relative;
+    /* position: relative; */
+    position: fixed;
     z-index: 100;
     min-width: 1032px;
+    width: 100%;
     /* overflow: hidden; */
     background: #fff;
     box-shadow:0 1px 3px rgba(26,26,26,.1);

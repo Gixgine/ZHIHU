@@ -25,9 +25,9 @@
           <li>是的附属国豆腐干的</li>
           <li>士大夫士大夫大师傅但是</li>
         </ul>
-        <div class="hot-list-bottom"></div>
+        <div class="hot-list-bottom">
+        </div>
       </div>
-
     </div>
 </template>
 <script>
@@ -45,7 +45,9 @@ export default {
       this.$refs.askbutton.style.transform="scale(1)";
       this.$refs.form.style.background="#f6f6f6";
       this.$refs.input.style.background="#f6f6f6";
-      this.activeSearch=false;
+      setTimeout(() => {
+        this.activeSearch=false;
+      }, 200);
     },
     onFocus(){
       // console.log("焦点出现");
@@ -54,7 +56,9 @@ export default {
       this.$refs.askbutton.style.transform="scale(0)";
       this.$refs.form.style.background="white";
       this.$refs.input.style.background="white";
-      this.activeSearch=true;
+      setTimeout(() => {
+        this.activeSearch=true;
+      }, 300);
     }
   },
   mounted(){
@@ -81,6 +85,8 @@ export default {
     background: #f6f6f6;
     border: 1px solid #ebebeb;
     border-radius: 3px;
+    /* float: left; */
+    /* left:-30px; */
   }
   .search-main{
     display:flex;
@@ -88,6 +94,7 @@ export default {
     padding-left: 12px;
     padding-right: 0;
     transition: width linear .3s ;
+    transition-delay: .1s;
   }
   .search-button{
     position: absolute;
@@ -108,6 +115,7 @@ export default {
     padding: 0 14px;
     width:60px;
     left:340px;
+    /* float: left; */
     height: 34px;
     line-height: 34px;
     background-color: var(--color-lighter-blue);
@@ -119,13 +127,14 @@ export default {
     cursor: pointer;
     transition: opacity linear .2s ,
                 transform linear .2s;
+    transition-delay: .1s;
   }
   .childtabbar>button:hover{
     background-color: var(--color-deeper-blue);
   }
   .hot-list{
     position: absolute;
-    z-index:206;
+    z-index:200;
     top:100%;
     margin-top: 15px;
     background-color: #fff;

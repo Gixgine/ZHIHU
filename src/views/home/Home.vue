@@ -1,11 +1,17 @@
 <template>
   <div id="home">
-    首页
+    <home-content></home-content>
   </div>
 </template>
 <script>
+
+import HomeContent from "components/content/homecontent/HomeContent"
+
 export default {
-  name:"Home"
+  name:"Home",
+  components:{
+    HomeContent
+  },
 }
 </script>
 <style scoped>

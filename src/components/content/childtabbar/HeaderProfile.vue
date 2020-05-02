@@ -87,16 +87,17 @@ export default {
 </script>
 <style scoped>
   .header-profile{
-    position: relative;
-    width: 200px;
+    position: absolute;
+    right:10px;
+    min-width: 150px;
     height: 31px;
     /* background-color: pink; */
     /* position: absolute; */
     /* right:170px; */
     display:flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    margin-left:200px;
+    /* float:right; */
   }
   .header-profile-bell div{
     /* display:block; */
